@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Remote {
+  id          Int       @id @default(autoincrement())
+  type        String
+  config      String
+  releases    Release[] @relation(name: "RemoteReleases")
+  latestId    Int?      @unique
+  latest      Release?  @relation(name: "LatestRelease", fields: [latestId], references: [id])
+  usedIn      Service[]
+  lastFetched DateTime?
+  isFetching  Boolean   @default(false)
+
+  @@unique([type, config])
+}
+
+model Release {
+  id            Int       @id @default(autoincrement())
+  remoteId      Int
+  remote        Remote    @relation("RemoteReleases", fields: [remoteId], references: [id])
+  remoteVersion String
+  version       String
+  hidden        Boolean   @default(false)
+  name          String?
+  releaseNotes  String?
+  publishedAt   DateTime?
+  prerelease    Boolean?
+  link          String?
+  latestIn      Remote[]  @relation("LatestRelease")
+
+  @@unique([remoteId, remoteVersion])
+}
+
+model Service {
+  id               Int       @id @default(autoincrement())
+  serverId         Int
+  server           Server    @relation(fields: [serverId], references: [id])
+  name             String
+  remoteId         Int?
+  remote           Remote?   @relation(fields: [remoteId], references: [id])
+  installedVersion String?
+  lastChecked      DateTime?
+}
+
+model Server {
+  id       Int       @id @default(autoincrement())
+  services Service[]
+  name     String
+}

@@ -8,13 +8,13 @@
 	let { data, children } = $props();
 </script>
 
-<header>
+<header class="-mt-2">
 	<!-- Heading -->
-	<div class="border-b border-t border-white/10 bg-background-700/10">
-		<div class="divide-white/5 grid grid-rows-2 divide-y w-full">
-			<div class="w-full flex">
+	<div class="border-b border-white/10 bg-background-700/10">
+		<div class="flex w-full flex-col divide-y divide-white/5">
+			<div class="flex w-full">
 				<div
-					class="max-w-7xl mx-auto w-full flex flex-col items-start justify-between gap-x-8 gap-y-4 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8"
+					class="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-x-8 gap-y-4 px-4 py-4 sm:flex-row sm:items-center sm:px-6 lg:px-8"
 				>
 					<div>
 						<div class="flex items-center gap-x-3">
@@ -38,35 +38,35 @@
 					/>
 				</div>
 			</div>
-			<div class="w-full flex">
+			<div class="flex w-full">
 				<!-- Stats -->
-				<div class="max-w-7xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+				<div class="mx-auto grid w-full max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
 					<div class="border-white/5 px-4 py-6 sm:px-6 lg:px-8">
-						<p class="text-sm font-medium leading-6 text-background-400">Remote provider</p>
-						<p class="mt-2 flex items-baseline h-full gap-x-2">
+						<p class="text-sm leading-6 font-medium text-background-400">Remote provider</p>
+						<p class="mt-2 flex h-full items-baseline gap-x-2">
 							<span class="text-2xl font-semibold tracking-tight text-white"
 								><RemoteProviderLabel remote={data.service.remote} /></span
 							>
 						</p>
 					</div>
-					<div class="border-white/5 px-4 py-6 sm:border-l sm:px-6 lg:px-8">
-						<p class="text-sm font-medium leading-6 text-background-400">Local provider</p>
+					<div class="border-t border-white/5 px-4 py-6 sm:border-l sm:px-6 md:border-t-0 lg:px-8">
+						<p class="text-sm leading-6 font-medium text-background-400">Local provider</p>
 						<p class="mt-2 flex items-baseline gap-x-2">
 							<span class="text-2xl font-semibold tracking-tight text-white"
 								><LocalProviderLabel remote={data.service.remote} /></span
 							>
 						</p>
 					</div>
-					<div class="border-white/5 px-4 py-6 lg:border-l sm:px-6 lg:px-8">
-						<p class="text-sm font-medium leading-6 text-background-400">Latest version</p>
+					<div class="border-t border-white/5 px-4 py-6 sm:px-6 lg:border-t-0 lg:border-l lg:px-8">
+						<p class="text-sm leading-6 font-medium text-background-400">Latest version</p>
 						<p class="mt-2 flex items-baseline gap-x-2">
 							<span class="text-2xl font-semibold tracking-tight text-white"
 								>{data.service?.remote?.latest?.version ?? '–'}</span
 							>
 						</p>
 					</div>
-					<div class="border-white/5 px-4 py-6 sm:border-l sm:px-6 lg:px-8">
-						<p class="text-sm font-medium leading-6 text-background-400">Installed version</p>
+					<div class="border-t border-white/5 px-4 py-6 sm:border-l sm:px-6 lg:border-t-0 lg:px-8">
+						<p class="text-sm leading-6 font-medium text-background-400">Installed version</p>
 						<p class="mt-2 flex items-baseline gap-x-2">
 							<span class="text-2xl font-semibold tracking-tight text-white"
 								>{data.service.installedVersion ?? '–'}</span
@@ -79,13 +79,13 @@
 	</div>
 
 	<!-- Secondary navigation -->
-	<div class="border-b border-white/10 mb-4 mt-6">
-		<div class="max-w-7xl mx-auto">
+	<div class="mt-6 mb-4 border-b border-white/10">
+		<div class="mx-auto max-w-7xl">
 			<Navbar />
 		</div>
 	</div>
 </header>
 
-<main class="mx-auto max-w-7xl">
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 	{@render children?.()}
 </main>

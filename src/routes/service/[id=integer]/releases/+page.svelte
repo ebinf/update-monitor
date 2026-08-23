@@ -13,10 +13,10 @@
 
 <div class="">
 	<div class="flex flex-row items-center justify-between pl-4 sm:pl-6 lg:pl-8">
-		<h2 class="text-base font-semibold leading-7 text-white">Releases</h2>
+		<h2 class="text-base leading-7 font-semibold text-white">Releases</h2>
 		<button
 			type="button"
-			class="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20 flex gap-x-2 items-top"
+			class="items-top flex gap-x-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
 			onclick={() => (showHidden = !showHidden)}
 		>
 			{#if showHidden}
@@ -54,10 +54,12 @@
 			{/if}</button
 		>
 	</div>
-	<ReleasesList
-		releases={data.releases}
-		latest={data.service.remote?.latest}
-		installed={data.service.installedVersion}
-		{showHidden}
-	/>
+	<div class="overflow-x-scroll">
+		<ReleasesList
+			releases={data.releases}
+			latest={data.service.remote?.latest}
+			installed={data.service.installedVersion}
+			{showHidden}
+		/>
+	</div>
 </div>

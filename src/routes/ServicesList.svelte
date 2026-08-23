@@ -40,7 +40,7 @@
 					Sort by
 				{/if}
 				<svg
-					class="text-background-500 h-5 w-5"
+					class="h-5 w-5 text-background-500"
 					viewBox="0 0 20 20"
 					fill="currentColor"
 					aria-hidden="true"
@@ -55,7 +55,7 @@
 
 			{#if sortDropdownOpen}
 				<div
-					class="bg-background-800 ring-background-900/5 absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md py-2 shadow-lg ring-1 focus:outline-none"
+					class="absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md bg-background-800 py-2 shadow-lg ring-1 ring-background-900/5 focus:outline-none"
 					role="menu"
 					aria-orientation="vertical"
 					aria-labelledby="sort-menu-button"
@@ -73,7 +73,7 @@
 				>
 					{#each ['Name', 'Date updated', 'Server'] as sortOption}
 						<button
-							class="text-background-50 block w-full px-3 py-1 text-left text-sm leading-6"
+							class="block w-full px-3 py-1 text-left text-sm leading-6 text-background-50"
 							class:bg-background-700={sortOption === sortBy}
 							role="menuitem"
 							tabindex="-1"

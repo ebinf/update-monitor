@@ -8,22 +8,26 @@
 	};
 
 	const menuItems: MenuItem[] = [
-		{ name: 'Overview', href: 'overview', active: ['/service/[id=integer]'] },
+		{ name: 'Overview', href: 'overview', active: ['/service/[id=integer]/overview'] },
 		{
 			name: 'Releases',
 			href: 'releases',
 			active: ['/service/[id=integer]/releases']
 		},
-		{ name: 'Changelog', href: '#' },
-		{ name: 'Documentation', href: '#' },
-		{ name: 'Settings', href: '#' }
+		{ name: 'Changelog', href: 'changelog', active: ['/service/[id=integer]/changelog'] },
+		{
+			name: 'Documentation',
+			href: 'documentation',
+			active: ['/service/[id=integer]/documentation']
+		},
+		{ name: 'Settings', href: 'settings', active: ['/service/[id=integer]/settings'] }
 	];
 </script>
 
 <nav class="flex overflow-x-auto py-4">
 	<ul
 		role="list"
-		class="flex min-w-full flex-none gap-x-6 px-4 text-sm font-semibold leading-6 text-background-400 sm:px-6 lg:px-8"
+		class="flex min-w-full flex-none gap-x-6 px-4 text-sm leading-6 font-semibold text-background-400 sm:px-6 lg:px-8"
 	>
 		{#each menuItems as item}
 			{@const isActive = item.active

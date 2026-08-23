@@ -1,15 +1,11 @@
 import { GITHUB_API_TOKEN_FINE } from '$env/static/private';
 import type { Release } from '$prisma/client';
-import {
-	defaultVersionPattern,
-	UpdateService,
-	type UpdateServiceOptions
-} from '$lib/server/updateServices/UpdateService';
+import { UpdateService, type UpdateServiceOptions } from '$lib/server/updateServices/UpdateService';
 import { Octokit } from 'octokit';
 import prisma from '$lib/server/database';
 import { z } from 'zod';
 
-export type GitHubOptions = {
+export type GitHubOptions = UpdateServiceOptions & {
 	owner: string;
 	repo: string;
 	useTagName?: boolean;

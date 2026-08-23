@@ -12,8 +12,8 @@ export type UpdateServiceOptions = {
 };
 
 export const UpdateServiceOptionsSchema = z.object({
-	versionPattern: z.instanceof(RegExp).optional(),
-	filterPattern: z.instanceof(RegExp).optional()
+	versionPattern: z.instanceof(RegExp).optional().default(defaultVersionPattern),
+	filterPattern: z.instanceof(RegExp).optional().default(defaultFilterPattern)
 });
 
 export abstract class UpdateService {

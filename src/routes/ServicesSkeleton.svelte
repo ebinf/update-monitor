@@ -6,29 +6,27 @@
 		<div class="min-w-0 flex-auto">
 			<div class="flex items-center gap-x-3">
 				<div
-					class="flex-none rounded-full p-1 bg-background-100/5 text-background-700 animate-pulse"
+					class="flex-none animate-pulse rounded-full bg-background-100/5 p-1 text-background-700"
 				>
 					<div class="h-2 w-2 rounded-full bg-current"></div>
 				</div>
-				<h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
-					<div class="bg-background-700 animate-pulse my-2 h-2 w-56 rounded"></div>
-				</h2>
+				<div class="my-2 h-2 w-56 animate-pulse rounded bg-background-700"></div>
 			</div>
 			<div
-				class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-background-400 animate-pulse"
+				class="mt-3 flex animate-pulse items-center gap-x-2.5 text-xs leading-5 text-background-400"
 			>
-				<div class="bg-background-700 my-2 h-1 w-48 rounded"></div>
+				<div class="my-2 h-1 w-48 rounded bg-background-700"></div>
 				<svg viewBox="0 0 2 2" class="h-0.5 w-0.5 flex-none fill-background-700">
 					<circle cx="1" cy="1" r="1" />
 				</svg>
-				<div class="bg-background-700 my-2 h-1 w-32 rounded"></div>
+				<div class="my-2 h-1 w-32 rounded bg-background-700"></div>
 			</div>
 		</div>
 		<div
-			class="flex-none rounded-full bg-background-700/10 px-2 py-1 h-7 w-16 animate-pulse text-xs font-medium ring-1 ring-inset ring-background-700/20"
+			class="h-7 w-16 flex-none animate-pulse rounded-full bg-background-700/10 px-2 py-1 text-xs font-medium ring-1 ring-background-700/20 ring-inset"
 		></div>
 		<svg
-			class="h-5 w-5 flex-none text-background-700 animate-pulse"
+			class="h-5 w-5 flex-none animate-pulse text-background-700"
 			viewBox="0 0 20 20"
 			fill="currentColor"
 			aria-hidden="true"

@@ -11,15 +11,24 @@
 	let { release, latest = false, installed = false }: Props = $props();
 </script>
 
-<tr>
-	<td class="py-4 pr-8 pl-4 sm:pl-6 lg:pl-8">
-		<div class="flex items-center gap-x-2">
+<tr
+	class={{
+		'bg-background-700/15': release.hidden,
+		'bg-blue-500/5': installed,
+		'bg-green-500/5': latest
+	}}
+>
+	<td class="max-w-96 py-4 pr-8 pl-4 sm:pl-6 lg:pl-8">
+		<div
+			class="flex items-center gap-x-2 text-wrap whitespace-break-spaces"
+			title={release.name || `Release ${release.version}`}
+		>
 			{#if release.hidden}
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
-					class="text-background-400 size-4"
+					class="size-4 text-background-400"
 				>
 					<path
 						fill-rule="evenodd"
@@ -40,9 +49,9 @@
 			</div>
 		</div>
 	</td>
-	<td class="hidden py-4 pr-4 pl-0 sm:table-cell sm:pr-8">
+	<td class="py-4 pr-4 pl-0 text-wrap whitespace-break-spaces sm:pr-8">
 		<div class="flex gap-x-3">
-			<div class="text-background-400 font-mono text-sm leading-6">{release.version}</div>
+			<div class="font-mono text-sm leading-6 text-background-400">{release.version}</div>
 			{#if latest}
 				<span
 					class="inline-flex items-center rounded-xl bg-green-400/10 px-2 py-1 text-xs text-green-400 ring-1 ring-green-400/20 ring-inset"
@@ -57,15 +66,13 @@
 			{/if}
 			{#if release.prerelease}
 				<span
-					class="bg-background-400/10 text-background-400 ring-background-400/20 inline-flex items-center rounded-xl px-2 py-1 text-xs ring-1 ring-inset"
+					class="inline-flex items-center rounded-xl bg-background-400/10 px-2 py-1 text-xs text-background-400 ring-1 ring-background-400/20 ring-inset"
 					>pre-release</span
 				>
 			{/if}
 		</div>
 	</td>
-	<td
-		class="text-background-400 hidden py-4 pr-4 pl-0 text-right text-sm leading-6 sm:table-cell sm:pr-6 lg:pr-8"
-	>
+	<td class="py-4 pr-4 pl-0 text-right text-sm leading-6 text-background-400 sm:pr-6 lg:pr-8">
 		<time
 			datetime={release.publishedAt?.toISOString()}
 			title={moment(release.publishedAt).format('LLL')}

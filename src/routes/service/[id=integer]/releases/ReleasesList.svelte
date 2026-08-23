@@ -44,12 +44,8 @@
 	<thead class="border-b border-white/10 text-sm leading-6 text-white">
 		<tr>
 			<th scope="col" class="py-2 pr-8 pl-4 font-semibold sm:pl-6 lg:pl-8">Name</th>
-			<th scope="col" class="hidden py-2 pr-8 pl-0 font-semibold sm:table-cell">Version</th>
-			<th
-				scope="col"
-				class="hidden py-2 pr-4 pl-0 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
-				>Published</th
-			>
+			<th scope="col" class="py-2 pr-8 pl-0 font-semibold">Version</th>
+			<th scope="col" class="py-2 pr-4 pl-0 text-right font-semibold sm:pr-6 lg:pr-8">Published</th>
 		</tr>
 	</thead>
 	<tbody class="divide-y divide-white/5">

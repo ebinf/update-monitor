@@ -10,7 +10,7 @@
 	let { remote = null }: Props = $props();
 </script>
 
-<span class="inline-flex items-baseline">
+<span>
 	{#await remote}
 		<span class="mr-1 inline-flex h-5 w-5 animate-pulse rounded-full bg-current opacity-20"></span>
 		Loading...

@@ -62,7 +62,6 @@ export class GitHub extends UpdateService {
 	}
 
 	async fetchReleases(): Promise<void> {
-		console.log('Fetching GitHub releases');
 		const iterator = this.octokit.paginate.iterator(this.octokit.rest.repos.listReleases, {
 			owner: this.options.owner,
 			repo: this.options.repo
@@ -88,7 +87,6 @@ export class GitHub extends UpdateService {
 				});
 			}
 		}
-		console.log('Updating latest version');
 		const latestVersion = await this.octokit.rest.repos.getLatestRelease({
 			owner: this.options.owner,
 			repo: this.options.repo

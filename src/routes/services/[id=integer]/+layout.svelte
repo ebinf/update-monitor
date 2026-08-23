@@ -50,9 +50,12 @@
 					<div class="border-white/5 px-4 py-6 sm:px-6 lg:px-8">
 						<p class="text-sm leading-6 font-medium text-background-400">Remote provider</p>
 						<p class="mt-2 flex h-full items-baseline gap-x-2">
-							<span class="text-2xl font-semibold tracking-tight text-white"
-								><RemoteProviderLabel remote={data.service.remote} /></span
+							<a
+								class="text-2xl font-semibold tracking-tight text-white hover:text-white/80"
+								href={resolve('/remotes/[id=integer]', { id: String(data.service.remote?.id) })}
 							>
+								<RemoteProviderLabel remote={data.service.remote} />
+							</a>
 						</p>
 					</div>
 					<div class="border-t border-white/5 px-4 py-6 sm:border-l sm:px-6 md:border-t-0 lg:px-8">

@@ -37,7 +37,6 @@ export abstract class UpdateService {
 	}
 
 	async getAllReleases(): Promise<Release[]> {
-		console.log('getAllReleases');
 		await this.fetch();
 		return prisma.release.findMany({
 			where: {
@@ -51,7 +50,6 @@ export abstract class UpdateService {
 
 	private async resolveFetchingPromise(): Promise<void> {
 		this.fetchingPromiseResolvers.forEach((resolve) => {
-			console.log('Promise resolved!');
 			resolve();
 		});
 		this.fetchingPromiseResolvers = [];
@@ -70,7 +68,6 @@ export abstract class UpdateService {
 		const promise = new Promise<void>((resolve) => {
 			resolver = resolve;
 		});
-		console.log('Promise pushed!');
 		this.fetchingPromiseResolvers.push(resolver!);
 		return promise;
 	}
@@ -92,7 +89,6 @@ export abstract class UpdateService {
 			return this.resolveFetchingPromise();
 		}
 		await this.fetchReleases();
-		console.log('Updating lastFetched');
 		await prisma.remote.update({
 			where: {
 				id: this.id
@@ -119,7 +115,6 @@ export abstract class UpdateService {
 	}
 
 	async getLatestRelease(): Promise<Release | null> {
-		console.log('getLatestRelease');
 		await this.fetch();
 		return (
 			(

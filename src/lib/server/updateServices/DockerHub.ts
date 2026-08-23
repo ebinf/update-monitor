@@ -1,4 +1,4 @@
-import { DOCKER_HUB_USERNAME, DOCKER_HUB_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { Release } from '$prisma/client';
 import { UpdateService, type UpdateServiceOptions } from '$lib/server/updateServices/UpdateService';
 import prisma from '$lib/server/database';
@@ -39,8 +39,8 @@ export class DockerHub extends UpdateService {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				identifier: DOCKER_HUB_USERNAME,
-				secret: DOCKER_HUB_TOKEN
+				identifier: env.DOCKER_HUB_USERNAME,
+				secret: env.DOCKER_HUB_TOKEN
 			})
 		});
 		if (!request.ok) {

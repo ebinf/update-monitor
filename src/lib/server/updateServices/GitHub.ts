@@ -1,4 +1,4 @@
-import { GITHUB_API_TOKEN_FINE } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { Release } from '$prisma/client';
 import { UpdateService, type UpdateServiceOptions } from '$lib/server/updateServices/UpdateService';
 import { Octokit } from 'octokit';
@@ -26,7 +26,7 @@ export class GitHub extends UpdateService {
 		super(id, options);
 		this.options = options;
 		this.octokit = new Octokit({
-			auth: GITHUB_API_TOKEN_FINE
+			auth: env.GITHUB_API_TOKEN_FINE
 		});
 	}
 

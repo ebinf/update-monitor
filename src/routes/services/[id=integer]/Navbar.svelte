@@ -8,19 +8,19 @@
 	};
 
 	const menuItems: MenuItem[] = [
-		{ name: 'Overview', href: 'overview', active: ['/service/[id=integer]/overview'] },
+		{ name: 'Overview', href: 'overview', active: ['/services/[id=integer]/overview'] },
 		{
 			name: 'Releases',
 			href: 'releases',
-			active: ['/service/[id=integer]/releases']
+			active: ['/services/[id=integer]/releases']
 		},
-		{ name: 'Changelog', href: 'changelog', active: ['/service/[id=integer]/changelog'] },
+		{ name: 'Changelog', href: 'changelog', active: ['/services/[id=integer]/changelog'] },
 		{
 			name: 'Documentation',
 			href: 'documentation',
-			active: ['/service/[id=integer]/documentation']
+			active: ['/services/[id=integer]/documentation']
 		},
-		{ name: 'Settings', href: 'settings', active: ['/service/[id=integer]/settings'] }
+		{ name: 'Settings', href: 'settings', active: ['/services/[id=integer]/settings'] }
 	];
 </script>
 

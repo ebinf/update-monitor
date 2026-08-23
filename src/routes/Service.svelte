@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import RemoteProviderLabel from '$lib/RemoteProviderLabel.svelte';
 	import StatusLabel from '$lib/StatusLabel.svelte';
 	import VersionIcon from '$lib/VersionIcon.svelte';
@@ -13,7 +14,7 @@
 
 	let { service }: Props = $props();
 
-	let link = $derived(`/service/${service.id}/releases`);
+	let link = $derived(resolve('/services/[id=integer]/releases', { id: String(service.id) }));
 </script>
 
 <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">
@@ -29,10 +30,10 @@
 				</a>
 			</h2>
 		</div>
-		<div class="text-background-400 mt-3 flex items-center gap-x-2.5 text-xs leading-5">
+		<div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-background-400">
 			<p class="truncate">Releases from <RemoteProviderLabel remote={service.remote} /></p>
 			{#if service.remote?.lastFetched}
-				<svg viewBox="0 0 2 2" class="fill-background-300 h-0.5 w-0.5 flex-none">
+				<svg viewBox="0 0 2 2" class="h-0.5 w-0.5 flex-none fill-background-300">
 					<circle cx="1" cy="1" r="1" />
 				</svg>
 				<p class="whitespace-nowrap">
@@ -47,7 +48,7 @@
 	</div>
 	<StatusLabel installed={service.installedVersion} latest={service.remote?.latest} />
 	<svg
-		class="text-background-400 h-5 w-5 flex-none"
+		class="h-5 w-5 flex-none text-background-400"
 		viewBox="0 0 20 20"
 		fill="currentColor"
 		aria-hidden="true"

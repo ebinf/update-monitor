@@ -133,6 +133,33 @@ export abstract class UpdateService {
 		);
 	}
 
+	async getRelevantChangelogs(installedVersion?: string | null): Promise<Release[]> {
+		if (!installedVersion) return [];
+		const latestRelease = await this.getLatestRelease();
+		const installedRelease = await prisma.release.findFirst({
+			where: {
+				version: installedVersion
+			},
+			orderBy: {
+				publishedAt: 'desc'
+			}
+		});
+		if (!latestRelease || !installedRelease) return [];
+		if (latestRelease.id === installedRelease.id) return [];
+		return prisma.release.findMany({
+			where: {
+				remoteId: this.id,
+				publishedAt: {
+					gt: installedRelease.publishedAt ?? new Date(0),
+					lte: latestRelease.publishedAt ?? new Date()
+				}
+			},
+			orderBy: {
+				publishedAt: 'desc'
+			}
+		});
+	}
+
 	async getLastFetched(): Promise<Date | null> {
 		return (
 			await prisma.remote.findUniqueOrThrow({

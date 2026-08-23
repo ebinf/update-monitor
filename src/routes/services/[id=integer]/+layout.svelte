@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import LocalProviderLabel from '$lib/LocalProviderLabel.svelte';
 	import RemoteProviderLabel from '$lib/RemoteProviderLabel.svelte';
 	import StatusLabel from '$lib/StatusLabel.svelte';
@@ -23,7 +24,12 @@
 								installed={data.service.installedVersion}
 							/>
 							<h1 class="flex gap-x-3 text-base leading-7">
-								<span class="font-semibold text-white">{data.service.server.name}</span>
+								<a
+									class="font-semibold text-white hover:text-white/80"
+									href={resolve('/servers/[id=integer]', { id: String(data.service.server.id) })}
+								>
+									{data.service.server.name}
+								</a>
 								<span class="text-background-600">/</span>
 								<span class="font-semibold text-white">{data.service.name}</span>
 							</h1>
@@ -53,7 +59,7 @@
 						<p class="text-sm leading-6 font-medium text-background-400">Local provider</p>
 						<p class="mt-2 flex items-baseline gap-x-2">
 							<span class="text-2xl font-semibold tracking-tight text-white"
-								><LocalProviderLabel remote={data.service.remote} /></span
+								><LocalProviderLabel local={null} /></span
 							>
 						</p>
 					</div>

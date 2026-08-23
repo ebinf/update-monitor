@@ -51,7 +51,9 @@
 	</td>
 	<td class="py-4 pr-4 pl-0 text-wrap whitespace-break-spaces sm:pr-8">
 		<div class="flex gap-x-3">
-			<div class="font-mono text-sm leading-6 text-background-400">{release.version}</div>
+			<div class="font-mono text-sm leading-6 text-background-400" title={release.remoteVersion}>
+				{release.version}
+			</div>
 			{#if latest}
 				<span
 					class="inline-flex items-center rounded-xl bg-green-400/10 px-2 py-1 text-xs text-green-400 ring-1 ring-green-400/20 ring-inset"

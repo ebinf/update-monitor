@@ -8,22 +8,13 @@
 	};
 
 	const menuItems: MenuItem[] = [
-		{ name: 'Dashboard', href: '/' },
-		{ name: 'Servers', href: '/servers', active: ['/servers', '/servers/new'] },
+		{ name: 'Dashboard', href: '/', active: ['/'] },
+		{ name: 'Servers', href: '/servers' },
 		{
 			name: 'Services',
-			href: '/services',
-			active: [
-				'/services',
-				'/services/new',
-				'/service/[id=integer]/overview',
-				'/service/[id=integer]/releases',
-				'/service/[id=integer]/changelog',
-				'/service/[id=integer]/documentation',
-				'/service/[id=integer]/settings'
-			]
+			href: '/services'
 		},
-		{ name: 'Remotes', href: '/remotes', active: ['/remotes', '/remotes/new'] }
+		{ name: 'Remotes', href: '/remotes' }
 	];
 
 	let mobileMenuOpen: boolean = $state(false);
@@ -109,7 +100,7 @@
 					{#each menuItems as item}
 						{@const isActive = item.active
 							? item.active.includes(page?.route?.id ?? '')
-							: page?.url?.pathname === item.href}
+							: page?.url?.pathname.startsWith(item.href)}
 						<a
 							href={item.href}
 							class="inline-flex items-center border-b-2 {isActive

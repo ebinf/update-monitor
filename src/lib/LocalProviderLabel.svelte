@@ -2,20 +2,20 @@
 	import type { Remote } from '$prisma/client';
 
 	interface Props {
-		remote?: Remote | Promise<Remote | null> | null;
+		local?: Remote | Promise<Remote | null> | null;
 	}
 
-	let { remote = null }: Props = $props();
+	let { local = null }: Props = $props();
 </script>
 
 <span class="inline-flex items-baseline">
-	{#await remote}
+	{#await local}
 		<span class="mr-1 inline-flex h-5 w-5 animate-pulse rounded-full bg-current opacity-20"></span>
 		Loading...
-	{:then remote}
-		{#if remote}
-			{@const config = eval('(' + remote.config + ')')}
-			{#if remote.type === 'GitHub'}
+	{:then local}
+		{#if local}
+			{@const config = eval('(' + local.config + ')')}
+			{#if local.type === 'GitHub'}
 				<svg
 					viewBox="0 0 24 24"
 					aria-hidden="true"

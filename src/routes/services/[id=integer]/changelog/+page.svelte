@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import ReleasesList from './ReleasesList.svelte';
-
+	import Changelog from './Changelog.svelte';
+	import ChangelogSkeleton from './ChangelogSkeleton.svelte';
+	import UpToDate from './UpToDate.svelte';
 	interface Props {
 		data: PageData;
 	}
@@ -11,9 +12,9 @@
 	let showHidden = $state(false);
 </script>
 
-<div class="">
-	<div class="flex flex-row items-center justify-between pl-4 sm:pl-6 lg:pl-8">
-		<h2 class="text-base leading-7 font-semibold text-white">Releases</h2>
+<div>
+	<div class="flex flex-row items-start justify-between pl-4 sm:pl-6 lg:pl-8">
+		<h2 class="text-base leading-7 font-semibold text-white">Changelog</h2>
 		<button
 			type="button"
 			class="items-top flex gap-x-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
@@ -54,12 +55,18 @@
 			{/if}</button
 		>
 	</div>
-	<div class="overflow-x-scroll">
-		<ReleasesList
-			releases={data.releases}
-			latest={data.service.remote?.latest}
-			installed={data.service.installedVersion}
-			{showHidden}
-		/>
+
+	{#if data.upToDate}
+		<UpToDate />
+	{/if}
+
+	<div class="my-8 flex flex-col">
+		{#await data.changelogs}
+			<ChangelogSkeleton />
+		{:then changelogs}
+			{#each changelogs.filter((changelog) => showHidden || !changelog.hidden) as changelog}
+				<Changelog {changelog} latest={data.service.remote?.latest?.id === changelog.id} />
+			{/each}
+		{/await}
 	</div>
 </div>

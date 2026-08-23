@@ -13,10 +13,10 @@ export type GitHubOptions = UpdateServiceOptions & {
 };
 
 export const GitHubOptionsSchema = z.object({
-	owner: z.string(),
-	repo: z.string(),
-	useTagName: z.boolean().optional(),
-	tag: z.string().optional()
+	owner: z.string().min(1, { message: 'Owner is required' }),
+	repo: z.string().min(1, { message: 'Repo is required' }),
+	useTagName: z.xor([z.string().transform((value) => value === 'on'), z.boolean()]).optional(),
+	hidePrereleases: z.xor([z.string().transform((value) => value === 'on'), z.boolean()]).optional()
 });
 
 export class GitHub extends UpdateService {
@@ -28,6 +28,10 @@ export class GitHub extends UpdateService {
 		this.octokit = new Octokit({
 			auth: GITHUB_API_TOKEN_FINE
 		});
+	}
+
+	get name(): string {
+		return this.options.owner + '/' + this.options.repo;
 	}
 
 	private releaseFromJson(json: {

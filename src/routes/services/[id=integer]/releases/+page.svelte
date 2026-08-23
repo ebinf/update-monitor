@@ -16,7 +16,7 @@
 		<h2 class="text-base leading-7 font-semibold text-white">Releases</h2>
 		<button
 			type="button"
-			class="items-top flex gap-x-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+			class="flex items-center gap-x-2 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
 			onclick={() => (showHidden = !showHidden)}
 		>
 			{#if showHidden}

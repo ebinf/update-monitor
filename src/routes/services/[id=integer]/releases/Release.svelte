@@ -56,19 +56,19 @@
 			</div>
 			{#if latest}
 				<span
-					class="inline-flex items-center rounded-xl bg-green-400/10 px-2 py-1 text-xs text-green-400 ring-1 ring-green-400/20 ring-inset"
+					class="inline-flex items-center self-center rounded-xl bg-green-400/10 px-2 py-1 text-xs text-green-400 ring-1 ring-green-400/20 ring-inset"
 					>latest</span
 				>
 			{/if}
 			{#if installed}
 				<span
-					class="inline-flex items-center rounded-xl bg-blue-400/10 px-2 py-1 text-xs text-blue-400 ring-1 ring-blue-400/20 ring-inset"
+					class="inline-flex items-center self-center rounded-xl bg-blue-400/10 px-2 py-1 text-xs text-blue-400 ring-1 ring-blue-400/20 ring-inset"
 					>installed</span
 				>
 			{/if}
 			{#if release.prerelease}
 				<span
-					class="inline-flex items-center rounded-xl bg-background-400/10 px-2 py-1 text-xs text-background-400 ring-1 ring-background-400/20 ring-inset"
+					class="inline-flex items-center self-center rounded-xl bg-background-400/10 px-2 py-1 text-xs text-background-400 ring-1 ring-background-400/20 ring-inset"
 					>pre-release</span
 				>
 			{/if}

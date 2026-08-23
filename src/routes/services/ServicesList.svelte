@@ -10,9 +10,10 @@
 				include: { remote: { include: { latest: true } }; server: true };
 			}>[]
 		>;
+		heading?: string;
 	}
 
-	let { services }: Props = $props();
+	let { services, heading }: Props = $props();
 
 	let sortDropdownOpen: boolean = $state(false);
 	let sortBy: string | undefined = $state();
@@ -22,7 +23,7 @@
 	<header
 		class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8"
 	>
-		<h1 class="text-base leading-7 font-semibold text-white">Services</h1>
+		<h1 class="text-base leading-7 font-semibold text-white">{heading || 'Services'}</h1>
 
 		<div class="relative">
 			<button

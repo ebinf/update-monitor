@@ -203,12 +203,12 @@ export type ServerOrderByWithRelationInput = {
 
 export type ServerWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  name?: string
   AND?: Prisma.ServerWhereInput | Prisma.ServerWhereInput[]
   OR?: Prisma.ServerWhereInput[]
   NOT?: Prisma.ServerWhereInput | Prisma.ServerWhereInput[]
-  name?: Prisma.StringFilter<"Server"> | string
   services?: Prisma.ServiceListRelationFilter
-}, "id">
+}, "id" | "name">
 
 export type ServerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

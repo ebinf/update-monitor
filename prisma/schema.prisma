@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client"
-  output     = "../src/lib/prisma/"
+  output   = "../src/lib/prisma/"
 }
 
 datasource db {
@@ -16,7 +16,7 @@ model Remote {
   config      String
   releases    Release[] @relation(name: "RemoteReleases")
   latestId    Int?      @unique
-  latest      Release?  @relation(name: "LatestRelease", fields: [latestId], references: [id])
+  latest      Release?  @relation(name: "LatestRelease", fields: [latestId], references: [id], onDelete: SetNull)
   usedIn      Service[]
   lastFetched DateTime?
   isFetching  Boolean   @default(false)
@@ -27,7 +27,7 @@ model Remote {
 model Release {
   id            Int       @id @default(autoincrement())
   remoteId      Int
-  remote        Remote    @relation("RemoteReleases", fields: [remoteId], references: [id])
+  remote        Remote    @relation("RemoteReleases", fields: [remoteId], references: [id], onDelete: Cascade)
   remoteVersion String
   version       String
   hidden        Boolean   @default(false)
@@ -44,10 +44,10 @@ model Release {
 model Service {
   id               Int       @id @default(autoincrement())
   serverId         Int
-  server           Server    @relation(fields: [serverId], references: [id])
+  server           Server    @relation(fields: [serverId], references: [id], onDelete: Cascade)
   name             String
   remoteId         Int?
-  remote           Remote?   @relation(fields: [remoteId], references: [id])
+  remote           Remote?   @relation(fields: [remoteId], references: [id], onDelete: SetNull)
   installedVersion String?
   lastChecked      DateTime?
 }
@@ -55,5 +55,5 @@ model Service {
 model Server {
   id       Int       @id @default(autoincrement())
   services Service[]
-  name     String
+  name     String    @unique
 }

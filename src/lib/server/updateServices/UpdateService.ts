@@ -106,6 +106,8 @@ export abstract class UpdateService {
 
 	abstract fetchReleases(): Promise<void>;
 
+	abstract get name(): string;
+
 	matchesFilter(version: string): boolean {
 		if (!this.options.filterPattern) return true;
 		return this.options.filterPattern.test(version);
@@ -134,7 +136,16 @@ export abstract class UpdateService {
 	}
 
 	async getRelevantChangelogs(installedVersion?: string | null): Promise<Release[]> {
-		if (!installedVersion) return [];
+		if (!installedVersion) {
+			return prisma.release.findMany({
+				where: {
+					remoteId: this.id
+				},
+				orderBy: {
+					publishedAt: 'desc'
+				}
+			});
+		}
 		const latestRelease = await this.getLatestRelease();
 		const installedRelease = await prisma.release.findFirst({
 			where: {

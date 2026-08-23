@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	type MenuItem = {
 		name: string;
@@ -27,8 +27,8 @@
 	>
 		{#each menuItems as item}
 			{@const isActive = item.active
-				? item.active.includes($page?.route?.id ?? '')
-				: $page?.url?.pathname === item.href}
+				? item.active.includes(page?.route?.id ?? '')
+				: page?.url?.pathname === item.href}
 			<li>
 				<a href={item.href} class:text-primary-400={isActive}>{item.name}</a>
 			</li>

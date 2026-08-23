@@ -1,22 +1,28 @@
 <script lang="ts">
 	import { classes } from 'svelte-transition-classes';
 	import Service from './Service.svelte';
-	import type { Prisma } from '@prisma/client';
+	import type { Prisma } from '$prisma/client';
 	import ServicesSkeleton from './ServicesSkeleton.svelte';
 
-	export let services: Promise<
-		Prisma.ServiceGetPayload<{ include: { remote: { include: { latest: true } }; server: true } }>[]
-	>;
+	interface Props {
+		services: Promise<
+			Prisma.ServiceGetPayload<{
+				include: { remote: { include: { latest: true } }; server: true };
+			}>[]
+		>;
+	}
 
-	let sortDropdownOpen: boolean = false;
-	let sortBy: string | undefined;
+	let { services }: Props = $props();
+
+	let sortDropdownOpen: boolean = $state(false);
+	let sortBy: string | undefined = $state();
 </script>
 
 <main>
 	<header
 		class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8"
 	>
-		<h1 class="text-base font-semibold leading-7 text-white">Services</h1>
+		<h1 class="text-base leading-7 font-semibold text-white">Services</h1>
 
 		<div class="relative">
 			<button
@@ -26,7 +32,7 @@
 				aria-expanded={sortDropdownOpen}
 				aria-haspopup="true"
 				class:font-medium={!!sortBy}
-				on:click={() => (sortDropdownOpen = !sortDropdownOpen)}
+				onclick={() => (sortDropdownOpen = !sortDropdownOpen)}
 			>
 				{#if sortBy}
 					{sortBy}
@@ -34,7 +40,7 @@
 					Sort by
 				{/if}
 				<svg
-					class="h-5 w-5 text-background-500"
+					class="text-background-500 h-5 w-5"
 					viewBox="0 0 20 20"
 					fill="currentColor"
 					aria-hidden="true"
@@ -49,7 +55,7 @@
 
 			{#if sortDropdownOpen}
 				<div
-					class="absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md bg-background-800 py-2 shadow-lg ring-1 ring-background-900/5 focus:outline-none"
+					class="bg-background-800 ring-background-900/5 absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md py-2 shadow-lg ring-1 focus:outline-none"
 					role="menu"
 					aria-orientation="vertical"
 					aria-labelledby="sort-menu-button"
@@ -67,11 +73,11 @@
 				>
 					{#each ['Name', 'Date updated', 'Server'] as sortOption}
 						<button
-							class="block w-full text-left px-3 py-1 text-sm leading-6 text-background-50"
+							class="text-background-50 block w-full px-3 py-1 text-left text-sm leading-6"
 							class:bg-background-700={sortOption === sortBy}
 							role="menuitem"
 							tabindex="-1"
-							on:click={() => {
+							onclick={() => {
 								sortBy = sortOption;
 								sortDropdownOpen = false;
 							}}

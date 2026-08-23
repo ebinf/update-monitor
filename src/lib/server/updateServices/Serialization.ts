@@ -1,4 +1,4 @@
-import type { Remote } from '@prisma/client';
+import type { Remote } from '$prisma/client';
 import { UpdateServiceOptionsSchema, type UpdateService } from './UpdateService';
 import { GitHub, GitHubOptionsSchema, type GitHubOptions } from './GitHub';
 

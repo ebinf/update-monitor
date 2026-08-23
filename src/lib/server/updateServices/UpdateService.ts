@@ -1,5 +1,5 @@
 import prisma from '$lib/server/database';
-import type { Release, Remote } from '@prisma/client';
+import type { Release, Remote } from '$prisma/client';
 import { z } from 'zod';
 import serializeJavascript from 'serialize-javascript';
 

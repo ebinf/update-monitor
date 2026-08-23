@@ -1,21 +1,25 @@
 <script lang="ts">
-	import type { Release } from '@prisma/client';
+	import type { Release } from '$prisma/client';
 	import moment from 'moment';
 
-	export let release: Release;
-	export let latest: boolean = false;
-	export let installed: boolean = false;
+	interface Props {
+		release: Release;
+		latest?: boolean;
+		installed?: boolean;
+	}
+
+	let { release, latest = false, installed = false }: Props = $props();
 </script>
 
 <tr>
-	<td class="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
+	<td class="py-4 pr-8 pl-4 sm:pl-6 lg:pl-8">
 		<div class="flex items-center gap-x-2">
 			{#if release.hidden}
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
-					class="size-4 text-background-400"
+					class="text-background-400 size-4"
 				>
 					<path
 						fill-rule="evenodd"
@@ -28,7 +32,7 @@
 				</svg>
 			{/if}
 			<div
-				class="truncate text-sm font-medium leading-6"
+				class="truncate text-sm leading-6 font-medium"
 				class:text-background-400={release.hidden}
 				class:text-white={!release.hidden}
 			>
@@ -36,31 +40,31 @@
 			</div>
 		</div>
 	</td>
-	<td class="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
+	<td class="hidden py-4 pr-4 pl-0 sm:table-cell sm:pr-8">
 		<div class="flex gap-x-3">
-			<div class="font-mono text-sm leading-6 text-background-400">{release.version}</div>
+			<div class="text-background-400 font-mono text-sm leading-6">{release.version}</div>
 			{#if latest}
 				<span
-					class="inline-flex items-center rounded-xl bg-green-400/10 px-2 py-1 text-xs text-green-400 ring-1 ring-inset ring-green-400/20"
+					class="inline-flex items-center rounded-xl bg-green-400/10 px-2 py-1 text-xs text-green-400 ring-1 ring-green-400/20 ring-inset"
 					>latest</span
 				>
 			{/if}
 			{#if installed}
 				<span
-					class="inline-flex items-center rounded-xl bg-blue-400/10 px-2 py-1 text-xs text-blue-400 ring-1 ring-inset ring-blue-400/20"
+					class="inline-flex items-center rounded-xl bg-blue-400/10 px-2 py-1 text-xs text-blue-400 ring-1 ring-blue-400/20 ring-inset"
 					>installed</span
 				>
 			{/if}
 			{#if release.prerelease}
 				<span
-					class="inline-flex items-center rounded-xl bg-background-400/10 px-2 py-1 text-xs text-background-400 ring-1 ring-inset ring-background-400/20"
+					class="bg-background-400/10 text-background-400 ring-background-400/20 inline-flex items-center rounded-xl px-2 py-1 text-xs ring-1 ring-inset"
 					>pre-release</span
 				>
 			{/if}
 		</div>
 	</td>
 	<td
-		class="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-background-400 sm:table-cell sm:pr-6 lg:pr-8"
+		class="text-background-400 hidden py-4 pr-4 pl-0 text-right text-sm leading-6 sm:table-cell sm:pr-6 lg:pr-8"
 	>
 		<time
 			datetime={release.publishedAt?.toISOString()}

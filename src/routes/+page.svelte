@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import ServicesList from './ServicesList.svelte';
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <div class="container mx-auto pt-6">

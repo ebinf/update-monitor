@@ -2,9 +2,13 @@
 	import type { PageData } from './$types';
 	import ReleasesList from './ReleasesList.svelte';
 
-	export let data: PageData;
+	interface Props {
+		data: PageData;
+	}
 
-	let showHidden = false;
+	let { data }: Props = $props();
+
+	let showHidden = $state(false);
 </script>
 
 <div class="">
@@ -13,7 +17,7 @@
 		<button
 			type="button"
 			class="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20 flex gap-x-2 items-top"
-			on:click={() => (showHidden = !showHidden)}
+			onclick={() => (showHidden = !showHidden)}
 		>
 			{#if showHidden}
 				<svg

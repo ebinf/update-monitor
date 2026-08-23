@@ -1,5 +1,5 @@
-import { GITHUB_API_TOKEN_CLASSIC, GITHUB_API_TOKEN_FINE } from '$env/static/private';
-import type { Release } from '@prisma/client';
+import { GITHUB_API_TOKEN_FINE } from '$env/static/private';
+import type { Release } from '$prisma/client';
 import {
 	defaultVersionPattern,
 	UpdateService,

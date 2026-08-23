@@ -5,7 +5,7 @@
 	import VersionIcon from '$lib/VersionIcon.svelte';
 	import Navbar from './Navbar.svelte';
 
-	export let data;
+	let { data, children } = $props();
 </script>
 
 <header>
@@ -87,5 +87,5 @@
 </header>
 
 <main class="mx-auto max-w-7xl">
-	<slot />
+	{@render children?.()}
 </main>

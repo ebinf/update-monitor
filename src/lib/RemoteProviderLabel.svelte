@@ -1,12 +1,16 @@
 <script lang="ts">
-	import type { Remote } from '@prisma/client';
+	import type { Remote } from '$prisma/client';
 
-	export let remote: Remote | Promise<Remote | null> | null = null;
+	interface Props {
+		remote?: Remote | Promise<Remote | null> | null;
+	}
+
+	let { remote = null }: Props = $props();
 </script>
 
 <span class="inline-flex items-baseline">
 	{#await remote}
-		<span class="animate-pulse inline-flex h-5 w-5 rounded-full bg-current opacity-20 mr-1"></span>
+		<span class="mr-1 inline-flex h-5 w-5 animate-pulse rounded-full bg-current opacity-20"></span>
 		Loading...
 	{:then remote}
 		{#if remote}

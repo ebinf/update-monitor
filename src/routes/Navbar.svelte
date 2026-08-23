@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 
 	type MenuItem = {
 		name: string;
@@ -79,8 +79,8 @@
 				<div class="hidden md:ml-6 md:flex md:space-x-8">
 					{#each menuItems as item}
 						{@const isActive = item.active
-							? item.active.includes($page?.route?.id ?? '')
-							: $page?.url?.pathname === item.href}
+							? item.active.includes(page?.route?.id ?? '')
+							: page?.url?.pathname === item.href}
 						<a
 							href={item.href}
 							class="inline-flex items-center border-b-2 {isActive

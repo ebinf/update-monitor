@@ -2,12 +2,16 @@
 	import RemoteProviderLabel from '$lib/RemoteProviderLabel.svelte';
 	import StatusLabel from '$lib/StatusLabel.svelte';
 	import VersionIcon from '$lib/VersionIcon.svelte';
-	import type { Prisma } from '@prisma/client';
+	import type { Prisma } from '$prisma/client';
 	import moment from 'moment';
 
-	export let service: Prisma.ServiceGetPayload<{
-		include: { remote: { include: { latest: true } }; server: true };
-	}>;
+	interface Props {
+		service: Prisma.ServiceGetPayload<{
+			include: { remote: { include: { latest: true } }; server: true };
+		}>;
+	}
+
+	let { service }: Props = $props();
 
 	let link = `/service/${service.id}/releases`;
 </script>
@@ -16,7 +20,7 @@
 	<div class="min-w-0 flex-auto">
 		<div class="flex items-center gap-x-3">
 			<VersionIcon latest={service.remote?.latest} installed={service.installedVersion} />
-			<h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
+			<h2 class="min-w-0 text-sm leading-6 font-semibold text-white">
 				<a href={link} class="flex gap-x-2">
 					<span class="truncate">{service.server.name}</span>
 					<span class="text-background-400">/</span>
@@ -25,10 +29,10 @@
 				</a>
 			</h2>
 		</div>
-		<div class="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-background-400">
+		<div class="text-background-400 mt-3 flex items-center gap-x-2.5 text-xs leading-5">
 			<p class="truncate">Releases from <RemoteProviderLabel remote={service.remote} /></p>
 			{#if service.remote?.lastFetched}
-				<svg viewBox="0 0 2 2" class="h-0.5 w-0.5 flex-none fill-background-300">
+				<svg viewBox="0 0 2 2" class="fill-background-300 h-0.5 w-0.5 flex-none">
 					<circle cx="1" cy="1" r="1" />
 				</svg>
 				<p class="whitespace-nowrap">
@@ -43,7 +47,7 @@
 	</div>
 	<StatusLabel installed={service.installedVersion} latest={service.remote?.latest} />
 	<svg
-		class="h-5 w-5 flex-none text-background-400"
+		class="text-background-400 h-5 w-5 flex-none"
 		viewBox="0 0 20 20"
 		fill="currentColor"
 		aria-hidden="true"

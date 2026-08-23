@@ -23,11 +23,11 @@
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-0">
 		<div class="flex h-16 justify-between">
 			<div class="flex">
-				<div class="-ml-2 mr-2 flex items-center md:hidden">
+				<div class="mr-2 -ml-2 flex items-center md:hidden">
 					<!-- Mobile menu button -->
 					<button
 						type="button"
-						class="relative inline-flex items-center justify-center rounded-md p-2 text-background-400 hover:bg-background-100 hover:text-background-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+						class="text-background-400 hover:bg-background-100 hover:text-background-500 focus:ring-primary-500 relative inline-flex items-center justify-center rounded-md p-2 focus:ring-2 focus:outline-none focus:ring-inset"
 						aria-controls="mobile-menu"
 						aria-expanded="false"
 					>
@@ -69,7 +69,7 @@
 						</svg>
 					</button>
 				</div>
-				<div class="flex flex-shrink-0 items-center">
+				<div class="flex shrink-0 items-center">
 					<img
 						class="h-8 w-auto"
 						src="https://tailwindui.com/img/logos/mark.svg?color=orange&shade=600"
@@ -85,17 +85,17 @@
 							href={item.href}
 							class="inline-flex items-center border-b-2 {isActive
 								? 'border-primary-500 text-primary-500'
-								: 'border-transparent text-background-400 hover:border-background-300'} px-1 pt-1 text-sm font-medium"
+								: 'text-background-400 hover:border-background-300 border-transparent'} px-1 pt-1 text-sm font-medium"
 							>{item.name}</a
 						>
 					{/each}
 				</div>
 			</div>
 			<div class="flex items-center">
-				<div class="flex-shrink-0">
+				<div class="shrink-0">
 					<button
 						type="button"
-						class="relative inline-flex items-center gap-x-1.5 rounded-md bg-primary-700 px-3 py-2 text-sm font-semibold text-background-50 shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+						class="bg-primary-700 text-background-50 hover:bg-primary-500 focus-visible:outline-primary-600 relative inline-flex items-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2"
 					>
 						<svg class="-ml-0.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
 							<path
@@ -111,32 +111,32 @@
 
 	<!-- Mobile menu, show/hide based on menu state. -->
 	<div class="md:hidden" id="mobile-menu">
-		<div class="space-y-1 pb-3 pt-2">
+		<div class="space-y-1 pt-2 pb-3">
 			<!-- Current: "bg-primary-50 border-primary-500 text-primary-700", Default: "border-transparent text-background-500 hover:bg-background-50 hover:border-background-300 hover:text-background-700" -->
 			<a
 				href="#"
-				class="block border-l-4 border-primary-500 bg-primary-50 py-2 pl-3 pr-4 text-base font-medium text-primary-700 sm:pl-5 sm:pr-6"
+				class="border-primary-500 bg-primary-50 text-primary-700 block border-l-4 py-2 pr-4 pl-3 text-base font-medium sm:pr-6 sm:pl-5"
 				>Dashboard</a
 			>
 			<a
 				href="#"
-				class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-background-500 hover:border-background-300 hover:bg-background-50 hover:text-background-700 sm:pl-5 sm:pr-6"
+				class="text-background-500 hover:border-background-300 hover:bg-background-50 hover:text-background-700 block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium sm:pr-6 sm:pl-5"
 				>Team</a
 			>
 			<a
 				href="#"
-				class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-background-500 hover:border-background-300 hover:bg-background-50 hover:text-background-700 sm:pl-5 sm:pr-6"
+				class="text-background-500 hover:border-background-300 hover:bg-background-50 hover:text-background-700 block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium sm:pr-6 sm:pl-5"
 				>Projects</a
 			>
 			<a
 				href="#"
-				class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-background-500 hover:border-background-300 hover:bg-background-50 hover:text-background-700 sm:pl-5 sm:pr-6"
+				class="text-background-500 hover:border-background-300 hover:bg-background-50 hover:text-background-700 block border-l-4 border-transparent py-2 pr-4 pl-3 text-base font-medium sm:pr-6 sm:pl-5"
 				>Calendar</a
 			>
 		</div>
-		<div class="border-t border-background-200 pb-3 pt-4">
+		<div class="border-background-200 border-t pt-4 pb-3">
 			<div class="flex items-center px-4 sm:px-6">
-				<div class="flex-shrink-0">
+				<div class="shrink-0">
 					<img
 						class="h-10 w-10 rounded-full"
 						src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -144,12 +144,12 @@
 					/>
 				</div>
 				<div class="ml-3">
-					<div class="text-base font-medium text-background-800">Tom Cook</div>
-					<div class="text-sm font-medium text-background-500">tom@example.com</div>
+					<div class="text-background-800 text-base font-medium">Tom Cook</div>
+					<div class="text-background-500 text-sm font-medium">tom@example.com</div>
 				</div>
 				<button
 					type="button"
-					class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-background-400 hover:text-background-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+					class="text-background-400 hover:text-background-500 focus:ring-primary-500 relative ml-auto shrink-0 rounded-full bg-white p-1 focus:ring-2 focus:ring-offset-2 focus:outline-none"
 				>
 					<span class="absolute -inset-1.5"></span>
 					<span class="sr-only">View notifications</span>
@@ -172,17 +172,17 @@
 			<div class="mt-3 space-y-1">
 				<a
 					href="#"
-					class="block px-4 py-2 text-base font-medium text-background-500 hover:bg-background-100 hover:text-background-800 sm:px-6"
+					class="text-background-500 hover:bg-background-100 hover:text-background-800 block px-4 py-2 text-base font-medium sm:px-6"
 					>Your Profile</a
 				>
 				<a
 					href="#"
-					class="block px-4 py-2 text-base font-medium text-background-500 hover:bg-background-100 hover:text-background-800 sm:px-6"
+					class="text-background-500 hover:bg-background-100 hover:text-background-800 block px-4 py-2 text-base font-medium sm:px-6"
 					>Settings</a
 				>
 				<a
 					href="#"
-					class="block px-4 py-2 text-base font-medium text-background-500 hover:bg-background-100 hover:text-background-800 sm:px-6"
+					class="text-background-500 hover:bg-background-100 hover:text-background-800 block px-4 py-2 text-base font-medium sm:px-6"
 					>Sign out</a
 				>
 			</div>

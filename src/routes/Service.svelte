@@ -13,7 +13,7 @@
 
 	let { service }: Props = $props();
 
-	let link = `/service/${service.id}/releases`;
+	let link = $derived(`/service/${service.id}/releases`);
 </script>
 
 <li class="relative flex items-center space-x-4 px-4 py-4 sm:px-6 lg:px-8">

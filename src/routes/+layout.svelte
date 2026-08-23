@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.css';
+	import './layout.css';
 	import Navbar from './Navbar.svelte';
 	interface Props {
 		children?: import('svelte').Snippet;

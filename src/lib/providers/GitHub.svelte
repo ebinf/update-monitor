@@ -1,7 +1,7 @@
 <svg
 	viewBox="0 0 24 24"
 	aria-hidden="true"
-	class="mr-1 inline-flex self-center"
+	class="mx-0.5 inline-flex self-center"
 	fill="currentColor"
 	style="height: 1.1em; width: 1.1em;"
 >

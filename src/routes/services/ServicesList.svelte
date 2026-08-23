@@ -3,6 +3,7 @@
 	import Service from './Service.svelte';
 	import type { Prisma } from '$prisma/client';
 	import ServicesSkeleton from './ServicesSkeleton.svelte';
+	import type { Snippet } from 'svelte';
 
 	interface Props {
 		services: Promise<
@@ -10,10 +11,12 @@
 				include: { remote: { include: { latest: true } }; server: true };
 			}>[]
 		>;
+
+		children?: Snippet;
 		heading?: string;
 	}
 
-	let { services, heading }: Props = $props();
+	let { services, heading, children }: Props = $props();
 
 	let sortDropdownOpen: boolean = $state(false);
 	let sortBy: string | undefined = $state();
@@ -96,6 +99,12 @@
 		{:then services}
 			{#each services as service (service.id)}
 				<Service {service} />
+			{:else}
+				{#if children}
+					<div>
+						{@render children?.()}
+					</div>
+				{/if}
 			{/each}
 		{:catch error}
 			<p class="text-white">An error occurred: {error.message}</p>

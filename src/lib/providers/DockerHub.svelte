@@ -6,7 +6,7 @@
 	viewBox="0 0 38 30"
 	version="1.1"
 	xml:space="preserve"
-	class="mr-1 inline-flex self-center"
+	class="mx-0.5 inline-flex self-center"
 	style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; height: 1.1em; width: auto;"
 >
 	<path

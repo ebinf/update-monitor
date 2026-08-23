@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Remote } from '$prisma/client';
+	import DockerHub from './providers/DockerHub.svelte';
 	import GitHub from './providers/GitHub.svelte';
 
 	interface Props {
@@ -19,6 +20,9 @@
 			{#if remote.type === 'GitHub'}
 				<GitHub />
 				{config.owner}/{config.repo}
+			{:else if remote.type === 'Docker Hub'}
+				<DockerHub />
+				{config.namespace}/{config.repo}
 			{/if}
 		{:else}
 			–

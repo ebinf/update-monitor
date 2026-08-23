@@ -112,7 +112,7 @@
 
 							{#each new Set(data.remotes.map((r) => r.type)) as type}
 								<optgroup label={type}>
-									{#each data.remotes as remote}
+									{#each data.remotes.filter((r) => r.type === type) as remote}
 										<option value={remote.id}>
 											{remote.name}
 										</option>

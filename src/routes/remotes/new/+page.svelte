@@ -67,7 +67,7 @@
 				<div>
 					<fieldset>
 						<legend class="text-sm/6 font-semibold text-white">Provider</legend>
-						<div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+						<div class="mt-2 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
 							{#each data.providers as provider (provider.name)}
 								<label
 									aria-label={provider.name}

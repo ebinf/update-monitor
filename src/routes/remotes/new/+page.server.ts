@@ -6,18 +6,21 @@ import { PrismaClientKnownRequestError } from '$prisma/internal/prismaNamespace'
 import { env } from '$env/dynamic/private';
 import { GitHubOptionsSchema } from '$lib/server/updateServices/GitHub';
 import serializeJavascript from 'serialize-javascript';
+import { DockerHubOptionsSchema } from '$lib/server/updateServices/DockerHub';
 
 export const load: PageServerLoad = async () => {
 	return {
 		providers: [
 			{
 				name: 'GitHub',
-				description: 'Fetch releases from a GitHub repository.',
+				description:
+					'Fetch releases from a GitHub repository. This includes release notes, version numbers, and publishing dates, if available in GitHub.',
 				enabled: env.GITHUB_API_TOKEN_FINE !== undefined
 			},
 			{
 				name: 'Docker Hub',
-				description: 'Fetch releases from Docker Hub.',
+				description:
+					'Fetch releases from Docker Hub. This will only fetch the tags and their respective publishing dates, but not any release notes as they are not available in Docker Hub.',
 				enabled: env.DOCKER_HUB_TOKEN !== undefined
 			}
 		]
@@ -36,17 +39,23 @@ export const actions: Actions = {
 		let providerOptions;
 
 		switch (provider) {
-			case 'GitHub':
+			case 'GitHub': {
 				const options = GitHubOptionsSchema.safeParse(Object.fromEntries(formData.entries()));
 				if (!options.success) {
 					return fail(400, { error: 'Invalid GitHub options', messages: options.error.issues });
 				}
 				providerOptions = options.data;
 				break;
+			}
 
-			case 'Docker Hub':
-				// Handle Docker Hub options here
+			case 'Docker Hub': {
+				const options = DockerHubOptionsSchema.safeParse(Object.fromEntries(formData.entries()));
+				if (!options.success) {
+					return fail(400, { error: 'Invalid Docker Hub options', messages: options.error.issues });
+				}
+				providerOptions = options.data;
 				break;
+			}
 
 			default:
 				return fail(400, { error: 'Invalid provider', messages: null });

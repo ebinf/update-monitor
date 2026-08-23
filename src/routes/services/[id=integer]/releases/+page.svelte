@@ -51,14 +51,15 @@
 					/>
 				</svg>
 				Show hidden
-			{/if}</button
-		>
+			{/if}
+		</button>
 	</div>
 	<div class="overflow-x-scroll">
 		<ReleasesList
 			releases={data.releases}
 			latest={data.service.remote?.latest}
 			installed={data.service.installedVersion}
+			manualLocal={true}
 			{showHidden}
 		/>
 	</div>

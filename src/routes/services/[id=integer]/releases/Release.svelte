@@ -1,21 +1,26 @@
 <script lang="ts">
 	import type { Release } from '$prisma/client';
 	import moment from 'moment';
+	import { setInstalled } from './setInstalled.remote';
+	import { invalidateAll } from '$app/navigation';
 
 	interface Props {
 		release: Release;
 		latest?: boolean;
 		installed?: boolean;
+		manualLocal?: boolean;
 	}
 
-	let { release, latest = false, installed = false }: Props = $props();
+	let { release, latest = false, installed = false, manualLocal = true }: Props = $props();
 </script>
 
 <tr
 	class={{
-		'bg-background-700/15': release.hidden,
-		'bg-blue-500/5': installed,
-		'bg-green-500/5': latest
+		group: true,
+		'bg-background-700/15 hover:bg-background-600/15': release.hidden,
+		'bg-blue-500/5 hover:bg-blue-500/10': installed,
+		'bg-green-500/5 hover:bg-green-500/10': latest,
+		'hover:bg-white/5': !release.hidden && !installed && !latest
 	}}
 >
 	<td class="max-w-96 py-4 pr-8 pl-4 sm:pl-6 lg:pl-8">
@@ -74,11 +79,37 @@
 			{/if}
 		</div>
 	</td>
-	<td class="py-4 pr-4 pl-0 text-right text-sm leading-6 text-background-400 sm:pr-6 lg:pr-8">
+	<td class="py-4 pr-8 pl-0 text-right text-sm leading-6 text-background-400 sm:pr-6 lg:pr-8">
 		<time
 			datetime={release.publishedAt?.toISOString()}
 			title={moment(release.publishedAt).format('LLL')}
 			>{moment(release.publishedAt).fromNow()}</time
 		>
+	</td>
+	<td class="w-56 py-0 pr-4 pl-0">
+		{#if !installed && manualLocal}
+			<button
+				class="invisible rounded p-1 text-background-600 group-hover:visible hover:bg-white/15 hover:text-white"
+				title="Set as installed"
+				onclick={async () => {
+					await setInstalled({ release: release.id });
+					invalidateAll();
+				}}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					class="size-5"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 0 0 1.075.676L10 15.082l5.925 2.844A.75.75 0 0 0 17 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0 0 10 2Z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+				<span class="sr-only">Set as installed</span>
+			</button>
+		{/if}
 	</td>
 </tr>

@@ -7,4 +7,11 @@ const connectionString = env.DATABASE_URL;
 const adapter = new PrismaBetterSqlite3({ url: connectionString });
 const prisma = new PrismaClient({ adapter });
 
+// Reset isFetching to false on server start
+await prisma.remote.updateMany({
+	data: {
+		isFetching: false
+	}
+});
+
 export default prisma;

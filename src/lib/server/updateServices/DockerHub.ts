@@ -79,14 +79,14 @@ export class DockerHub extends UpdateService {
 		let latestTag = null;
 		for (let pageNo = 1; ; pageNo++) {
 			const page = await this.apiRequest(
-				`namespaces/${this.options.namespace}/repositories/${this.options.repo}/tags?page=${pageNo}&page_size=100`
+				`namespaces/${this.options.namespace === '_' ? 'library' : this.options.namespace}/repositories/${this.options.repo}/tags?page=${pageNo}&page_size=100`
 			);
 			for (const tag of page.results) {
 				const version = tag.name;
 				const release: Release = {
 					id: 1,
 					remoteId: this.id,
-					remoteVersion: tag.digest ?? tag.name,
+					remoteVersion: `${tag.digest}_${tag.name}`,
 					version,
 					hidden: !this.matchesFilter(version),
 					link: null,
@@ -103,7 +103,8 @@ export class DockerHub extends UpdateService {
 						remoteId_remoteVersion: {
 							remoteId: this.id,
 							remoteVersion: release.remoteVersion
-						}
+						},
+						version: release.version
 					},
 					create: {
 						...release,
@@ -119,33 +120,63 @@ export class DockerHub extends UpdateService {
 				break;
 			}
 		}
-		console.log(latestTag);
-		const latestVersion = await prisma.release.findFirst({
-			where: {
-				remote: {
-					id: this.id
-				},
-				remoteVersion: latestTag?.digest,
-				version: {
-					not: {
-						equals: latestTag.name
+		let latestVersionId = undefined;
+		if (this.options.mode === 'withTag') {
+			latestVersionId = (
+				await prisma.release.findFirst({
+					where: {
+						remote: {
+							id: this.id
+						},
+						remoteVersion: {
+							startsWith: latestTag?.digest
+						},
+						version: {
+							not: latestTag.name
+						}
+					},
+					orderBy: [
+						{
+							hidden: 'asc'
+						},
+						{
+							publishedAt: 'desc'
+						},
+						{
+							name: 'desc'
+						}
+					]
+				})
+			)?.id;
+		} else if (this.options.mode === 'recent') {
+			latestVersionId = (
+				await prisma.release.findFirst({
+					where: {
+						remote: {
+							id: this.id
+						}
+					},
+					orderBy: {
+						publishedAt: 'desc'
 					}
-				}
-			},
-			orderBy: {
-				publishedAt: 'desc'
-			}
-		});
+				})
+			)?.id;
+		}
 		await prisma.remote.update({
 			where: {
 				id: this.id
 			},
 			data: {
-				latest: {
-					connect: {
-						id: latestVersion?.id
-					}
-				}
+				latest:
+					latestVersionId === undefined
+						? {
+								disconnect: true
+							}
+						: {
+								connect: {
+									id: latestVersionId
+								}
+							}
 			}
 		});
 	}

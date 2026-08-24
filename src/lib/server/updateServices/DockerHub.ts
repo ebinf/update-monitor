@@ -143,7 +143,7 @@ export class DockerHub extends UpdateService {
 							publishedAt: 'desc'
 						},
 						{
-							name: 'desc'
+							name: 'asc'
 						}
 					]
 				})

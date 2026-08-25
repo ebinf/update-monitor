@@ -140,10 +140,7 @@ export class DockerHub extends UpdateService {
 							hidden: 'asc'
 						},
 						{
-							publishedAt: 'desc'
-						},
-						{
-							name: 'asc'
+							name: 'desc'
 						}
 					]
 				})
@@ -156,9 +153,17 @@ export class DockerHub extends UpdateService {
 							id: this.id
 						}
 					},
-					orderBy: {
-						publishedAt: 'desc'
-					}
+					orderBy: [
+						{
+							hidden: 'asc'
+						},
+						{
+							publishedAt: 'desc'
+						},
+						{
+							name: 'asc'
+						}
+					]
 				})
 			)?.id;
 		}

@@ -85,7 +85,7 @@ export abstract class UpdateService {
 			}
 		});
 		const lastFetched = await this.getLastFetched();
-		if (lastFetched && lastFetched > new Date(Date.now() - 1000 * 60 * 60 * 24)) {
+		if (lastFetched && lastFetched > new Date(Date.now() - 1000 * 60 * 60 * 8)) {
 			return this.resolveFetchingPromise();
 		}
 		await this.fetchReleases();
